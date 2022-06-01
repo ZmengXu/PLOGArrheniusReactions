@@ -1,7 +1,9 @@
 # PLOGArrheniusReactions
-A library for OpenFOAM to handel the PLOG keywords in reactions
+A library for OpenFOAM to handel the `PLOG` keywords in reactions
 
-In Chemkin, PLOG is shown as
+> For more information, please refer to the [defination of PLOG](http://engine.princeton.edu/modelreduction/PLOG-documents/PLOG-software_distribution.pdf), and also the `Troe` keyword in the OpenFOAM [source code](https://github.com/OpenFOAM/OpenFOAM-8/blob/master/src/thermophysicalModels/specie/reaction/reactionRate/fallOffFunctions/TroeFallOffFunction/TroeFallOffFunction.H).
+
+In Chemkin, `PLOG` is shown as
 ```C++
 C3H4+H=CH3CCH2 9.2E+38 -8.65 7000. !(This is a dummy reaction rate for Chemkin) 
  PLOG /0.1 9.2E+38 -8.65 7000./ 
