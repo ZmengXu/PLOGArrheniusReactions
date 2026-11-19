@@ -307,13 +307,19 @@ inline Foam::scalar Foam::ArrheniusPLOGReactionRate::ddT
             // k = kl^((log10(pr) - log10(p))/(log10(pr) - log10(pl)))*kr((log10(p) - log10(pl))/(log10(pr) - log10(pl)))
             // a = (log10(pr) - log10(p))/(log10(pr) - log10(pl));
             // b = (log10(p) - log10(pl))/(log10(pr) - log10(pl));
-            // ddT(k) = k*(kl*b+kr*a)/(kr*kl)
-        
+            // a, b depend only on p, so d(ln k)/dT = a*d(ln kl)/dT + b*d(ln kr)/dT
+
             scalar a = (log10(pr) - log10(p))/(log10(pr) - log10(pl));
             scalar b = (log10(p) - log10(pl))/(log10(pr) - log10(pl));
-            
-            // ddT(k) = k*(kl*b+kr*a)/(kr*kl)
-            return k*(kl*b+kr*a)/(kr*kl);
+
+            // ddT(k) = k/T*(a*(beta_l + Ta_l/T) + b*(beta_r + Ta_r/T))
+            return k/T
+            *
+            (
+                a * (ArrheniusData_[left].beta() + ArrheniusData_[left].Ta()/T)
+                +
+                b * (ArrheniusData_[right].beta() + ArrheniusData_[right].Ta()/T)
+            );
         }
     }
 }
